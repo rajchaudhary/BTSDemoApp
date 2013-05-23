@@ -1,0 +1,199 @@
+.logoutButton{
+	position: relative;
+	float: left;
+	border: 1px solid;
+	display: none;
+	background-color: #5f78ab;
+	color: #fff;
+	cursor: pointer;
+	vertical-align: top;
+	padding: 4px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.loginButton{
+	position: relative;
+	float: left;
+}
+
+.container{
+	position: relative;
+	border: 1px solid #ddd;
+	padding: 10px;
+	margin-top: 35px;
+	text-align: center;
+	background: white;
+}
+
+.inputField{
+	position: relative;
+	width: 280px;
+	height: 25px;
+	border: 2px solid #ddd;
+	margin-bottom: 100px;
+	padding: 5px;
+}
+
+.fbProfile{
+	display: none;
+	border: 1px solid #ddd;
+	width: 55%;
+	position: relative;
+	float: left;
+	padding: 10px;
+	box-shadow: 1px 1px 1px 0px #ddd;
+	margin: 20px;
+	left: 15%;
+}
+.inProfile{
+	display: none;
+	border: 1px solid #ddd;
+	width: 55%;
+	position: relative;
+	float: left;
+	padding: 10px;
+	box-shadow: 1px 1px 1px 0px #ddd;
+	margin: 20px;
+	left: 15%;
+}
+
+.linkedInContainer{
+	position: relative;
+	float: left;
+	width: 45%;
+	height: 150px;
+	border: 1px solid #ddd;
+}
+
+.facebookContainer{
+	position: relative;
+	float: left;
+	width: 45%;
+	height: 150px;
+	border: 1px solid #ddd;
+	margin-left: 90px;
+}
+
+.photo{
+	position: relative;
+	float: left;
+	border: 1px solid #ddd;
+	width: 20%;
+}
+
+.name{
+	position: relative;
+	float: left;
+	margin-left: 20px;
+	color: rgb(119, 115, 115);
+}
+
+.location{
+	position: relative;
+	float: left;
+	margin-left: 20px;
+	color: rgb(119, 115, 115);
+	font-size: 12px;
+}
+.company{
+	position: relative;
+	float: left;
+	margin-left: 20px;
+	color: rgb(119, 115, 115);
+	font-size: 12px;
+	text-align: left;
+}
+
+.inputFieldLabel{
+	position: relative;
+	font-size: 20px;
+	color: rgb(119, 115, 115);
+	margin-right: 10px;
+}
+
+.heading{
+	position: relative;
+	float: left;
+	color: rgb(119, 115, 115);
+	font-size: 20px;
+	width: 100%;
+}
+
+.ui-autocomplete{
+	z-index: 1;
+	top: -279px;
+	left: 576px;
+	display: block;
+	position: relative;
+	padding: 5px;
+	width: 280px !important;
+	border: 1px solid #ddd;
+	list-style: none;
+	background: rgb(254, 255, 237);
+	max-height: 320px;
+	overflow-y: auto;
+}
+
+.ui-menu-item{
+	padding: 10px;
+	border: 1px solid #ddd;
+	margin-bottom: 5px;
+	cursor: pointer;
+	position: relative;
+	float: left;
+	width: 90%;
+}
+
+.ui-corner-all{
+	font-size: 17px;
+	color: rgb(78, 78, 78);
+	cursor: pointer;
+	width: 90%;
+	position: relative;
+	float: left;
+}
+
+.ui-menu-item:hover{
+	background: rgb(245, 245, 245);
+}
+
+.icon-image{
+	position: relative;
+	float: right;
+	width: 20px;
+}
+
+.signInDiv{
+	visibility: hidden !important;
+	text-align: center;
+	margin-top: 40px;
+	position: absolute;
+	width: 100%;
+}
+
+.signInDivVisible{
+	visibility: visible !important;
+}
+
+.signInText{
+	position: relative;
+	float: left;
+	font-size: 22px;
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+.rightHalf{
+	position: relative;
+	float: left;
+	width: 75%;
+}
+
+.signInTextFB{
+	position: relative;
+	float: left;
+	font-size: 22px;
+	width: 100%;
+	margin-bottom: 20px;	
+}

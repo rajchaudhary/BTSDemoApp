@@ -1,0 +1,33 @@
+<div class="container container_16 clearfix">
+	<div class="grid_16">
+		<label class="inputFieldLabel">Input Field:</label>
+		{{view Ember.TextField valueBinding="controller.inputTextValue" id="readProfileInput" class="inputField" }}
+	</div>
+
+	<div class="linkedInContainer">
+		<div class="heading">LinkedIn Profile</div>
+		<div class="inProfile">
+			<img {{bindAttr src="controller.linkedInUserProfile.photoURL"}} class="photo">
+			<div class="rightHalf">
+				<div class="name">{{controller.linkedInUserProfile.name}}</div>
+				<div class="location">{{controller.linkedInUserProfile.location}}</div>
+				{{#if controller.linkedInUserProfile.company}}
+					<div class="company"><strong>Company:</strong>&nbsp;{{controller.linkedInUserProfile.company}}</div>
+				{{/if}}
+			</div>
+		</div>
+	</div>
+	<div class="facebookContainer">
+		<div class="heading">Facebook Profile</div>
+		<div class="fbProfile">
+			<img {{bindAttr src="controller.fbUserProfile.photoURL"}} class="photo">
+			<div class="rightHalf">
+				<div class="name">{{controller.fbUserProfile.name}}</div>
+				<div class="location">{{controller.fbUserProfile.location}}</div>
+				{{#if controller.fbUserProfile.company}}
+					<div class="company"><strong>Company:</strong>&nbsp;{{controller.fbUserProfile.company}}</div>
+				{{/if}}
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  	<meta charset="UTF-8">
+  	<title>BTS Read Profile</title>  	
+    <link href="css/style.css" type="text/css" rel="stylesheet">
+    <link href="css/grid.css" type="text/css" rel="stylesheet">
+
+    <!-- Initialize JS Plugins -->
+
+    <script src="libs/jquery-1.8.1.min.js" type="text/javascript"></script>
+    <script src="libs/jquery-ui.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="libs/handlebars.js"></script>
+    <script type="text/javascript" src="libs/ember.js"></script>
+    <script type="text/javascript" src="libs/loader.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript">
+    	$('document').ready(function(){
+    	});
+    </script>
+
+    <script type="text/javascript" src="http://platform.linkedin.com/in.js">
+      api_key:oziu0mjkioxh
+      onLoad:onLinkedInLoad
+      scope:r_basicprofile,r_emailaddress,r_network,r_fullprofile,r_contactinfo
+      authorize: true
+    </script>
+  </head>
+
+  <body id="body">
+    <div id="fb-root"></div>
+
+    <script>
+      function onLinkedInLoad() {
+       // Listen for an auth event to occur
+       IN.Event.on(IN, "auth", onLinkedInAuth);
+      }
+   
+      function onLinkedInAuth() {
+        console.log("LinkedIn Authorized!");
+        BTS.ReadProfileView.appendTo('#ember-div');
+      }
+
+      window.fbAsyncInit = function() {
+        // init the FB JS SDK
+        FB.init({
+          appId      : '529906567065407',                     // App ID from the app dashboard
+          status     : true,                                 // Check Facebook Login status
+          xfbml      : true                                  // Look for social plugins on the page
+        });
+
+        // Additional initialization code such as adding Event Listeners goes here
+        FB.Event.subscribe('auth.authResponseChange', function(response) {
+          // Here we specify what we do with the response anytime this event occurs. 
+          if (response.status === 'connected') {
+            $(".signInTextFB").hide();
+            BTS.AccessToken = response.authResponse.accessToken;
+            $(".logoutButton").show();
+            $(".signInDiv").addClass("signInDivVisible");
+          } else if (response.status === 'not_authorized') {
+            $(".logoutButton").hide();
+            $(".signInDiv").removeClass("signInDivVisible");
+            // In this case, the person is logged into Facebook, but not into the app, so we call
+            // FB.login() to prompt them to do so. 
+            // In real-life usage, you wouldn't want to immediately prompt someone to login 
+            // like this, for two reasons:
+            // (1) JavaScript created popup windows are blocked by most browsers unless they 
+            // result from direct interaction from people using the app (such as a mouse click)
+            // (2) it is a bad experience to be continually prompted to login upon page load.
+            FB.login(function(response){console.log(response);},{scope: 'email,user_location,user_work_history,friends_location'});
+          } else {
+            $(".logoutButton").hide();
+            $(".signInDiv").removeClass("signInDivVisible");
+            // In this case, the person is not logged into Facebook, so we call the login() 
+            // function to prompt them to do so. Note that at this stage there is no indication
+            // of whether they are logged into the app. If they aren't then they'll see the Login
+            // dialog right after they log in to Facebook. 
+            // The same caveats as above apply to the FB.login() call here.
+            FB.login(function(response){console.log(response);},{scope: 'email,user_location,user_work_history,friends_location'});
+          }
+        });
+      };
+
+      // Load the SDK asynchronously
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "https://connect.facebook.net/en_US/all.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+
+      // Here we run a very simple test of the Graph API after login is successful. 
+      // This testAPI() function is only called in those cases. 
+      function testAPI() {
+        console.log('Welcome!  Fetching your information.... ');
+        FB.api('/me', function(response) {
+          console.log('Good to see you, ' + response.name + '.');
+        });
+      }
+
+      function fbLogout() {
+        $("#linkedInLogOut").click();
+
+        FB.logout(function (response) {
+            window.location.reload();
+        });
+      }
+    </script>   
+    <div class="container_16 clearfix">
+      <div class="signInTextFB">Please login using Facebook first.</div>
+      <!--Below we include the Login Button social plugin. This button uses the JavaScript SDK to-->
+      <!--present a graphical Login button that triggers the FB.login() function when clicked.-->
+      <fb:login-button scope="email,user_location,user_work_history,friends_location" show-faces="true" width="250" max-rows="1" class="loginButton"></fb:login-button>
+      <span id="fbLogout" onclick="fbLogout()">
+        <a class="fb_button fb_button_medium">
+          <span class="logoutButton">Logout</span>
+        </a>
+      </span>
+    </div>
+
+    <div class="signInDiv">
+      <div class="signInText">Now login using LinkedIn also!</div>
+      <script type="IN/Login">
+        <a id="linkedInLogOut" href="javascript:void(0)" onClick="IN.User.logout()">Logout</a>
+      </script>
+    </div>
+
+    <div id="ember-div">
+    </div>
+
+  </body>
+</html>
