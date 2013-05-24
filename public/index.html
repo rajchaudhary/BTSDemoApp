@@ -32,6 +32,11 @@
 
     <script>
       function onLinkedInLoad() {
+        try {
+          IN.User.logout();
+        } catch (err) {
+          console.log(err);
+        }
        // Listen for an auth event to occur
        IN.Event.on(IN, "auth", onLinkedInAuth);
       }
@@ -100,6 +105,7 @@
       }
 
       function fbLogout() {
+        IN.User.logout();
         $("#linkedInLogOut").click();
 
         FB.logout(function (response) {

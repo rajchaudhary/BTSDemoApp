@@ -99,9 +99,7 @@ BTS.ReadProfileController = Ember.Controller.create({
 			img_url = "https://graph.facebook.com/" + keyword +'/picture/',
 			self = this;
 
-		$.ajax({
-			url:url,
-			success:function(data){
+		$.getJSON(url,function(data){
 				if(Ember.empty(data.error)){
 					$(".fbProfile").show();
 					self.get("fbUserProfile").set("name",data.name);
@@ -119,27 +117,39 @@ BTS.ReadProfileController = Ember.Controller.create({
 					}
 					self.get("fbUserProfile").set("photoURL",img_url);
 				}
-			},
-			error:function(){
-				$(".fbProfile").hide();
-				self.set("fbUserProfile",Ember.Object.create());
-			}
-		});
+				else{
+					$(".fbProfile").hide();
+					self.set("fbUserProfile",Ember.Object.create());
+				}
+			});
 	},
 
 	fbWithSearch:function(keyword){
 		var url = "https://graph.facebook.com/search?q=" + keyword + "&type=user&access_token=" + BTS.AccessToken,
 			self = this;
-		$.ajax({
-			url:url,
-			success:function(result){
+		$.getJSON(url,function(result){
 				self.get("users").clear();
 				result.data.forEach(function(obj){
 					self.get("users").pushObject({"value":obj.name,"label":obj.name + "(Facebook)","id":obj.id,"fromFB":true});
 				});
+				$("#readProfileInput").autocomplete({
+			  		source: self.get("users"),
+			  		select: function( event, ui ) {
+			  			var id = ui.item.id,
+			  				from = ui.item.fromFB;
+			  			if(from){
+			  				self.fbWithUserName(id);
+			  			}
+			  			else{
+			  				self.linkedInWithUserName(id,false);
+			  			}
+			  		}
+				});
+				$( "#readProfileInput" ).on( "autocompletesearch", function( event, ui ) {} );
+				$("#readProfileInput").autocomplete("search");
 				self.linkedInWithSearch(keyword);				
 			}
-		});
+		);
 
 	},
 
