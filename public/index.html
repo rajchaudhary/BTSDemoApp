@@ -105,6 +105,7 @@
       }
 
       function fbLogout() {
+        BTS.ReadProfileView.remove();
         IN.User.logout();
         $("#linkedInLogOut").click();
 
